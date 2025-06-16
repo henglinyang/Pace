@@ -120,6 +120,8 @@ if __name__ == '__main__':
     if argc == 0:
         print('Usage: python pace.py <full marathon time>')
         print('       python pace.py <distance> <time>')
+        print('                      <distance>: full half pace k5 km *[kKMm]')
+        print('                      <time>    : *:* or *:*:*')
         quit()
     if argc == 1:
         p = Pace('full', argv[0])
