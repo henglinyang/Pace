@@ -72,6 +72,12 @@ class Pace(object):
             return float(distance[:-1])
         return float(distance)
 
+    # adjusted by 1.02 to account for inaccuray of GPS tracked distance
+    @property
+    def gps_mile(self):
+        return self.seconds_to_time(int((self._seconds * self._mile.value)
+                                        // (self._meters * 1.02)))
+
     @property
     def mile(self):
         return self.seconds_to_time(int(self._seconds * self._mile.value // self._meters))
@@ -119,7 +125,7 @@ if __name__ == '__main__':
         p = Pace('full', argv[0])
     else:
         p = Pace(argv[0], argv[1])
-    print('Pace ' + p.mile + ', Full ' + p.full + ', 10k ' + p.tenK + ', 5k ' + p.fiveK + ', 1500m ' + p.K5 + ', 1000m ' + p.Km)
+    print('GPS ' + p.gps_mile + ', Pace ' + p.mile + ', Full ' + p.full + ', 10k ' + p.tenK + ', 5k ' + p.fiveK + ', 1500m ' + p.K5 + ', 1000m ' + p.Km)
         
 
 
